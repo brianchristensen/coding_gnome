@@ -13,8 +13,4 @@ defmodule TextClient.Interact do
       tally:        Hangman.tally(game)
     }
   end
-
-  def play(_state) do
-
-  end
 end
