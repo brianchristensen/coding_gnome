@@ -7,7 +7,7 @@ defmodule TextClient.Summary do
       "\n\n",
       "Word so far : #{tally.letters |> Enum.join(" ")}\n",
       "Guesses left: #{tally.turns_left}\n",
-      "Already used: #{game.game_service.used |> MapSet.to_list() |> Enum.sort() |> Enum.join(" ")}\n"
+      "Already used: #{tally.used }\n"
     ]
     game
   end

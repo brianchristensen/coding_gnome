@@ -1,13 +1,18 @@
 defmodule Dictionary.WordList do
-  def start(),
-    do:
-      "../../assets/words.txt"
-      |> Path.expand(__DIR__)
-      |> File.read!()
+  @agent __MODULE__
 
-  def random_word(words),
-    do:
-      words
-      |> String.split(~r/\n/)
-      |> Enum.random()
+  def start_link() do
+    Agent.start_link(&word_list/0, name: @agent)
+  end
+
+  def random_word() do
+    Agent.get(@agent, &Enum.random/1)
+  end
+
+  defp word_list() do
+    "../../assets/words.txt"
+    |> Path.expand(__DIR__)
+    |> File.read!()
+    |> String.split(~r/\n/)
+  end
 end

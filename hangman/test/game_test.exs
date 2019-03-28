@@ -15,36 +15,36 @@ defmodule GameTest do
   test "state isn't changed for :won or :lost game" do
     for state <- [ :won, :lost ] do
       game = Game.new_game() |> Map.put(:game_state, state)
-      assert ^game = Game.make_move(game, "x")
+      assert { ^game, _tally } = Game.make_move(game, "x")
     end
   end
 
   test "first occurrence of letter is not already used" do
     game = Game.new_game()
-    game  = Game.make_move(game, "x")
+    { game, _tally }  = Game.make_move(game, "x")
     assert game.game_state != :already_used
   end
 
   test "second occurrence of letter is already used" do
     game = Game.new_game()
-    game  = Game.make_move(game, "x")
+    { game, _tally }  = Game.make_move(game, "x")
     assert game.game_state != :already_used
-    game  = Game.make_move(game, "x")
+    { game, _tally }  = Game.make_move(game, "x")
     assert game.game_state == :already_used
   end
 
   test "a good guess is recognized and a guessed word is a won game" do
     game = Game.new_game("hi")
-    game  = Game.make_move(game, "h")
+    { game, _tally }  = Game.make_move(game, "h")
     assert game.game_state == :good_guess
     assert game.turns_left == 7
-    game  = Game.make_move(game, "i")
+    { game, _tally }  = Game.make_move(game, "i")
     assert game.game_state == :won
   end
 
   test "bad guess is recognized" do
     game = Game.new_game("hi")
-    game  = Game.make_move(game, "x")
+    { game, _tally }  = Game.make_move(game, "x")
     assert game.game_state == :bad_guess
     assert game.turns_left == 6
   end
@@ -62,16 +62,10 @@ defmodule GameTest do
     game = Game.new_game("hi")
 
     Enum.reduce(test_data, game, fn ({guess, game_state, turns_left}, game) ->
-      game  = Game.make_move(game, guess)
+      { game, _tally }  = Game.make_move(game, guess)
       assert game.game_state == game_state
       assert game.turns_left == turns_left
       game
     end)
-  end
-
-  test "invalid input is recognized" do
-    game = Game.new_game("hi")
-    game = Game.make_move(game, "xa")
-    assert game.game_state == :invalid_input
   end
 end

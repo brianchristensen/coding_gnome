@@ -3,11 +3,11 @@ defmodule TextClient.Player do
 
   # won, lost, good_guess, bad_guess, already_used, invalid_input, initializing
   def play(game = %State{tally: %{ game_state: :won }}) do
-    exit_with_message("You WON! The word was: #{game.game_service.letters |> Enum.join()}")
+    exit_with_message("You WON! The word was: #{game.word}")
   end
 
   def play(game = %State{tally: %{ game_state: :lost }}) do
-    exit_with_message("Sorry, you lost :( The word was: #{game.game_service.letters |> Enum.join()}")
+    exit_with_message("Sorry, you lost :( The word was: #{game.word}")
   end
 
   def play(game = %State{tally: %{ game_state: :good_guess }}) do
