@@ -1,13 +1,15 @@
 defmodule GallowsWeb.HangmanView do
   use GallowsWeb, :view
 
-  @responses %{
-    :won => { :success, "You Won!" },
-    :lost => { :danger, "You Lost!" },
-    :good_guess => { :success, "Good guess!" },
-    :bad_guess => { :warning, "Bad guess!" },
-    :already_used => { :info, "You already guessed that" }
-  }
+  import GallowsWeb.Helpers.GameStateHelper
+
+  def turn(left, target) when target >= left do
+    "opacity: 1"
+  end
+
+  def turn(_left, _target) do
+    "opacity: 0.1"
+  end
 
   def game_over?(%{ game_state: game_state }) do
     game_state in [:won, :lost]
@@ -15,20 +17,5 @@ defmodule GallowsWeb.HangmanView do
 
   def new_game_button(conn) do
     button("New Game", to: Routes.hangman_path(conn, :create_game), autofocus: "autofocus")
-  end
-
-  def game_state(state) do
-    @responses[state]
-    |> alert()
-  end
-
-  defp alert(nil), do: ""
-  defp alert({class, msg}) do
-    """
-    <div class="alert alert-#{class}">
-      #{msg}
-    </div>
-    """
-    |> raw()
   end
 end
