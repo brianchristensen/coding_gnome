@@ -3,7 +3,7 @@
   <%= game_state(@tally.game_state) %>
 </div>
 <div style="display: flex; flex-direction: row; justify-content: space-around;">
-  <div sty>
+  <div>
     <%= render "_gallows.html", left: @tally.turns_left %>
   </div>
   <div style="width: 300px;">
