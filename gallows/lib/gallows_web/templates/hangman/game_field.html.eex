@@ -1,4 +1,7 @@
-<h1 style="text-align: center;">Hangman</h1>
+<div style="text-align: center;">
+  <h1>Hangman</h1>
+  <%= game_state(@tally.game_state) %>
+</div>
 <div style="display: flex; flex-direction: row; justify-content: space-around;">
   <div sty>
     <%= render "_gallows.html", left: @tally.turns_left %>

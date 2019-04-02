@@ -1,5 +1,3 @@
-<%= game_state(@tally.game_state) %>
-
 <p>Turns left: <%= @tally.turns_left %></p>
 <p>Letters used: <%= @tally.used %></p>
 <p>Word so far: <%= @tally.letters |> Enum.join(" ") %></p>
