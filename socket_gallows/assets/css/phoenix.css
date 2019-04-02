@@ -35,7 +35,7 @@ select {
   border-radius: 4px;
 }
 .alert-success {
-  color: green;
+  color: darkgreen;
   background-color: lightgreen;
   border-color: #bce8f1;
 }
@@ -52,6 +52,11 @@ select {
 .alert-danger {
   color: #a94442;
   background-color: #f2dede;
+  border-color: #ebccd1;
+}
+.alert-init {
+  color: saddlebrown;
+  background-color: lightsalmon;
   border-color: #ebccd1;
 }
 .alert p {

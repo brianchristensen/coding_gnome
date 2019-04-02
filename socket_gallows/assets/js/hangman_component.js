@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom'
 import Gallows from './gallows'
 
 const responses = {
-  won: ['success', "You Won!"],
-  lost: ['danger', "You Lost!"],
-  good_guess: ['info', "Good guess!"],
-  bad_guess: ['warning', "Bad guess!"],
-  invalid_guess: ['warning', "Please guess single lowercase letters"],
-  already_used: ['warning', "You already guessed that"],
-  initializing: [null, null]
+  won: ['success', 'You Won!'],
+  lost: ['danger', 'You Lost!'],
+  good_guess: ['info', 'Good guess!'],
+  bad_guess: ['warning', 'Bad guess!'],
+  invalid_guess: ['warning', 'Please guess single lowercase letters'],
+  already_used: ['warning', 'You already guessed that'],
+  initializing: ['init', `Don't get hung!`]
 }
 
 function HangmanComponent(props) {
@@ -22,15 +22,18 @@ function HangmanComponent(props) {
     setGuess("")
   }
 
+  const alert_style = responses[tally.game_state][0]
+  const alert_msg = responses[tally.game_state][1]
+  
   return (
     <div>
       <div style={{textAlign: 'center'}}>
         <h1>Hangman</h1>
-        <div className={`alert alert-${responses[tally.game_state][0]}`}>{responses[tally.game_state][1]}</div>        
+        <div className={`alert alert-${alert_style}`}>{alert_msg}</div>        
       </div>
       <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around'}}>
         <div>
-          <Gallows left={tally.turns_left}/>
+          <Gallows turns_left={tally.turns_left}/>
         </div>
         <div style={{width: '300px'}}>
           <p>Turns left: {tally.turns_left}</p>

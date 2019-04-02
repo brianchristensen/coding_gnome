@@ -11,25 +11,20 @@ defmodule SocketGallowsWeb.HangmanChannel do
 
   def handle_in("new_game", _, socket) do
     game = Hangman.new_game()
-    socket = assign(socket, :game, game)
     tally = Hangman.tally(game)
-
+    socket = assign(socket, :game, game)
     push(socket, "tally", tally)
     { :noreply, socket }
   end
 
   def handle_in("tally", _, socket) do
-    game = socket.assigns.game
-    tally = Hangman.tally(game)
-
+    tally = socket.assigns.game |> Hangman.tally()
     push(socket, "tally", tally)
     { :noreply, socket }
   end
 
-  def handle_in("make_move", payload, socket) do
-    game = socket.assigns.game
-    tally = Hangman.make_move(game, payload["guess"])
-
+  def handle_in("make_move", guess, socket) do
+    tally = socket.assigns.game |> Hangman.make_move(guess)
     push(socket, "tally", tally)
     { :noreply, socket }
   end

@@ -13,7 +13,7 @@ export default class HangmanSocket {
     this.setup_channel()
 
     this.channel.on("tally", tally => {
-      console.log("tally", tally)
+      // render our game
       renderHangman(tally, this.new_game, this.make_move)
     })
   }  
@@ -23,7 +23,6 @@ export default class HangmanSocket {
     this.channel
       .join()
       .receive("ok", resp => {
-        console.log("connected: ", resp)
         this.fetch_tally()
       })
       .receive("error", resp => {
@@ -41,6 +40,6 @@ export default class HangmanSocket {
   }
 
   make_move(guess) {
-    this.channel.push("make_move", {guess: guess})
+    this.channel.push("make_move", guess)
   }
 }
