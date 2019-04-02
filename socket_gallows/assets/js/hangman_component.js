@@ -1,11 +1,6 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
-import gallows from './gallows'
-
-let turn = (left, num) => {
-  if(left >= num) return "opacity: 0.1"
-  else return "opacity: 0"
-}
+import Gallows from './gallows'
 
 const responses = {
   won: ['success', "You Won!"],
@@ -21,6 +16,7 @@ function HangmanComponent(props) {
   const { tally, new_game, make_move } = props.hangman
   const game_over = ["won", "lost"].includes(tally.game_state)
   const [guess, setGuess] = useState("")
+
   const make_move_and_clear_guess = () => {
     make_move(guess)
     setGuess("")
@@ -34,6 +30,7 @@ function HangmanComponent(props) {
       </div>
       <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around'}}>
         <div>
+          <Gallows left={tally.turns_left}/>
         </div>
         <div style={{width: '300px'}}>
           <p>Turns left: {tally.turns_left}</p>

@@ -34,6 +34,11 @@ select {
   border: 1px solid transparent;
   border-radius: 4px;
 }
+.alert-success {
+  color: green;
+  background-color: lightgreen;
+  border-color: #bce8f1;
+}
 .alert-info {
   color: #31708f;
   background-color: #d9edf7;
