@@ -44,8 +44,17 @@ defmodule Hangman.Game do
   end
 
   defp accept_move(game, guess, _already_guessed) do
-    Map.put(game, :used, MapSet.put(game.used, guess))
-    |> score_guess(Enum.member?(game.letters, guess))
+    cond do
+      valid(guess) ->
+        Map.put(game, :used, MapSet.put(game.used, guess))
+        |> score_guess(Enum.member?(game.letters, guess))
+      true ->
+        %{ game | game_state: :invalid_guess }
+    end
+  end
+
+  defp valid(guess) do
+    guess =~ ~r/^[a-z]{1}$/
   end
 
   defp score_guess(game, _good_guess = true) do

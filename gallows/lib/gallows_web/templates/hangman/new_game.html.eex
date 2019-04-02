@@ -1,0 +1,4 @@
+<div style="text-align: center;">
+  <h1>Welcome to Hangman!</h1>
+  <%= new_game_button(@conn) %>
+</div>

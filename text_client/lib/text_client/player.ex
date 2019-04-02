@@ -22,6 +22,10 @@ defmodule TextClient.Player do
     continue_with_message(game, "You already used that letter")
   end
 
+  def play(game = %State{tally: %{ game_state: :invalid_guess }}) do
+    continue_with_message(game, "Please guess a single lowercase letter")
+  end
+
   def play(game = %State{tally: %{ game_state: :initializing }}) do
     continue_with_message(game, "\nWelcome to Hangman!")
   end
