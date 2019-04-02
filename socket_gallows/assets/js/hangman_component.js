@@ -30,7 +30,7 @@ function HangmanComponent(props) {
     <div>
       <div style={{textAlign: 'center'}}>
         <h1>Hangman</h1>
-        <span className={`badge badge-${responses[tally.game_state][0]}`}>{responses[tally.game_state][1]}</span>        
+        <div className={`alert alert-${responses[tally.game_state][0]}`}>{responses[tally.game_state][1]}</div>        
       </div>
       <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around'}}>
         <div>
@@ -43,7 +43,7 @@ function HangmanComponent(props) {
           { game_over ?
             <div>
               <p>The word was: <b>{tally.word}</b></p>
-              <button onclick={new_game}>New Game</button>
+              <button onClick={new_game} autoFocus>New Game</button>
             </div>            
           : 
             <div>
@@ -53,6 +53,7 @@ function HangmanComponent(props) {
                 value={guess} 
                 onChange={e => setGuess(e.target.value.slice(0, 1))} 
                 onKeyDown={e => e.key === 'Enter' ? make_move_and_clear_guess() : null}
+                autoComplete="off"
                 autoFocus/>
               <input type="button" value="Make Move" onClick={make_move_and_clear_guess}/>
             </div>

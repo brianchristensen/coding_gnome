@@ -12,7 +12,10 @@ defmodule SocketGallowsWeb.HangmanChannel do
   def handle_in("new_game", _, socket) do
     game = Hangman.new_game()
     socket = assign(socket, :game, game)
-    { :ok, socket }
+    tally = Hangman.tally(game)
+
+    push(socket, "tally", tally)
+    { :noreply, socket }
   end
 
   def handle_in("tally", _, socket) do
