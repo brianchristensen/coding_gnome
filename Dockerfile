@@ -1,7 +1,7 @@
 # stage 1: build project
 FROM bitwalker/alpine-elixir-phoenix:latest AS phx-builder
 
-ENV MIX_ENV=prod PORT=4001
+ENV MIX_ENV=prod HOST=localhost PORT=4001
 
 COPY dictionary ./dictionary
 COPY hangman ./hangman
@@ -23,4 +23,4 @@ RUN cd socket_gallows && \
 
 EXPOSE 4001
 
-ENTRYPOINT ["/bin/bash"]
+CMD ["/opt/app/bin/socket_gallows", "foreground"]
