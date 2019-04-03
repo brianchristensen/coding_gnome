@@ -42,5 +42,4 @@ COPY --from=build /build/dictionary/assets/words.txt words.txt
 WORKDIR /app
 COPY --from=build /package /app
 
-EXPOSE 4001
 CMD ["/app/bin/socket_gallows", "foreground"]
