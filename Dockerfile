@@ -24,6 +24,7 @@ RUN mix release
 WORKDIR /package
 RUN cp /build/socket_gallows/_build/prod/rel/socket_gallows/releases/0.1.0/socket_gallows.tar.gz /package/socket_gallows.tar.gz
 RUN tar xvf socket_gallows.tar.gz
+RUN rm socket_gallows.tar.gz
 
 ##### stage 2: run app #####
 # the OS here must match the OS from the build stage
