@@ -28,5 +28,9 @@ In order to simplify this I'm choosing to deploy my OTP app inside a docker cont
 The deployment steps above are codified in the Dockerfile in the root directory.
 It is a two stage build with the second stage taking the tarball generated in the
 first stage and running it in a clean alpine container so that the size of the container
-is only 10mb larger than the size of the OTP app alone.  It has overridable HOST and PORT:
+is only 10mb larger than the size of the OTP app alone.
+It has overridable HOST and PORT:
 docker run -d -e "HOST=hangman.servebeer.com" -e "PORT=18900" -p 3001:18900 socket_gallows
+or if it was pulled down from my container registry, for instance:
+docker run -d -e "HOST=hangman.servebeer.com" -e "PORT=18900" -p 3001:18900 brianchristensen/dev:socket_gallows
+but the host and port will default to localhost:4001
