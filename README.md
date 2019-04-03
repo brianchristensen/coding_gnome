@@ -24,14 +24,9 @@ To deploy to a remote machine, one need build the release in a Docker container
 which matches your target machine’s OS, kernel version, architecture, and system libraries,
 for instance when developing on OSX and deploying on a Linux server.
 
-My first attempt at deployment made me really sad, but I was able to get it working after many different attempts.
-1. Compiled the tarball in an alpine docker container 
-2. Copied the tarball out of docker to my local machine
-3. Copied the tarball from my local to the alpine linux server
-4. Unzipped the tarball and ran it with commands 11 & 12 above
-Note: Had to change the prox.exs config to url: [host: "hangman.servebeer.com", port: {:system, "PORT"}]
-because web sockets do not work if the host does not match the users origin.
-
-Supposedly for AWS/GCP there are specialized methods using those services in collaboration with an orchestrator
-like Kubernetes that take advantage of the specialized infrastructure as code environments they offer,
-which would be useful for more complex projects, outside of the scope of this readme.
+In order to simplify this I'm choosing to deploy my OTP app inside a docker container.
+The deployment steps above are codified in the Dockerfile in the root directory.
+It is a two stage build with the second stage taking the tarball generated in the
+first stage and running it in a clean alpine container so that the size of the container
+is only 10mb larger than the size of the OTP app alone.  It has overridable HOST and PORT:
+docker run -e "HOST=hangman.servebeer.com" -e "PORT=18900" -p 3001:18900 socket_gallows
