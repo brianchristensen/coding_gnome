@@ -23,25 +23,4 @@ RUN cd socket_gallows && \
 
 EXPOSE 4001
 
-ENTRYPOINT ["/opt/app/bin/socket_gallows", "start"]
-  # # stage 2: run project and expose port
-  # FROM bitwalker/alpine-elixir:latest
-
-  # EXPOSE 5000
-  # ENV PORT=5000 MIX_ENV=prod
-
-  # COPY --from=phx-builder /opt/app/_build /opt/app/_build
-  # COPY --from=phx-builder /opt/app/priv /opt/app/priv
-  # COPY --from=phx-builder /opt/app/config /opt/app/config
-  # COPY --from=phx-builder /opt/app/lib /opt/app/lib
-  # COPY --from=phx-builder /opt/app/deps /opt/app/deps
-  # COPY --from=phx-builder /opt/app/.mix /opt/app/.mix
-  # COPY --from=phx-builder /opt/app/mix.* /opt/app/
-
-  # # alternatively you can just copy the whole dir over with:
-  # # COPY --from=phx-builder /opt/app /opt/app
-  # # be warned, this will however copy over non-build files
-
-  # USER default
-
-  # CMD ["mix", "phx.server"]
+ENTRYPOINT ["/bin/bash"]
